@@ -2,7 +2,7 @@
 
 -- RANKS
 INSERT INTO ranks (rankID, rankName) VALUES 
-(1, 'Lieutenant'), 
+(1, 'Lieutenant'),
 (2, 'Captain'), 
 (3, 'Major');
 
@@ -61,3 +61,7 @@ VALUES
 (1, 301, 'Fracture', 'Cast & Rest', TO_DATE('2024-10-10', 'YYYY-MM-DD')),
 (2, 301, 'Heatstroke', 'Hydration', TO_DATE('2023-07-05', 'YYYY-MM-DD'));
 
+<<<<<<< HEAD
+=======
+-- === YOUR ORIGINAL 
+>>>>>>> 4a28d2aaf9452e8ccdc5fab06fc76eb97641607b
