@@ -16,7 +16,7 @@ HAVING COUNT(DISTINCT m.missionID) = (
 );
 
 --------------------------------------------------------------------------------
--- 2. Personnel Who Never Completed Any Training But Have Received Awards (worked)
+-- 2. Personnel Who Never Completed Any Training But Have Received Awards 
 --------------------------------------------------------------------------------
 SELECT p.personnelID, p.firstName, p.lastName
 FROM personnel p
@@ -33,7 +33,7 @@ AND EXISTS (
 );
 
 --------------------------------------------------------------------------------
--- 3. Longest-Serving Active Personnel Based on Enlistment Date (working)
+-- 3. Longest-Serving Active Personnel Based on Enlistment Date 
 --------------------------------------------------------------------------------
 SELECT p.personnelID, p.firstName, p.lastName, TO_CHAR(p.enlistmentDate, 'DD-MM-YYYY') AS enlistmentDate
 FROM personnel p
@@ -45,8 +45,7 @@ WHERE (SYSDATE - p.enlistmentDate) = (
 
 
 --------------------------------------------------------------------------------
--- 4. Units Where All Personnel Have Completed a Specific Training
--- NOTE: Replace :trainingID with a specific training ID, e.g., 3
+-- 4. Units Where All Personnel Have Completed a Specific Training (training id 1)
 --------------------------------------------------------------------------------
 SELECT u.unitID, u.unitName
 FROM units u
@@ -61,13 +60,13 @@ AND NOT EXISTS (
         SELECT 1
         FROM personnel_trainings pt
         WHERE pt.personnelID = p.personnelID
-          AND pt.trainingID = 3
+          AND pt.trainingID = 1
           AND pt.completionDate IS NOT NULL
     )
 );
 
 --------------------------------------------------------------------------------
--- 5. Personnel Who Received Disciplinary Action After Receiving an Award (working)
+-- 5. Personnel Who Received Disciplinary Action After Receiving an Award 
 --------------------------------------------------------------------------------
 SELECT p.personnelID, p.firstName, p.lastName
 FROM personnel p
