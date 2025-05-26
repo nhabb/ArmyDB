@@ -35,13 +35,14 @@ AND EXISTS (
 --------------------------------------------------------------------------------
 -- 3. Longest-Serving Active Personnel Based on Enlistment Date (working)
 --------------------------------------------------------------------------------
-SELECT p.personnelID, p.firstName, p.lastName, p.enlistmentDate
+SELECT p.personnelID, p.firstName, p.lastName, TO_CHAR(p.enlistmentDate, 'DD-MM-YYYY') AS enlistmentDate
 FROM personnel p
 WHERE (SYSDATE - p.enlistmentDate) = (
     SELECT MAX(SYSDATE - enlistmentDate)
     FROM personnel
     WHERE status = 'Active'
 );
+
 
 --------------------------------------------------------------------------------
 -- 4. Units Where All Personnel Have Completed a Specific Training
