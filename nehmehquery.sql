@@ -33,13 +33,6 @@ FROM UNITS u
 Left JOIN EQUIPMENT e ON u.UNITID = e.ASSIGNEDTOUNIT
 GROUP BY u.UNITNAME;
 
---------------------------------------------------------------------------
---Show all offenses done by personnel and the action taking regradinf it--
---------------------------------------------------------------------------
-
-SELECT p.FIRSTNAME, p.FIRSTNAME ,d.OFFENSE, d.ACTIONTAKEN
-FROM  DISCIPLINARY_ACTIONS d JOIN PERSONNEL p
-ON p.PERSONNELID = d.PERSONNELID;
 
 --------------------------------------------------------------------------
 --Show all disciplinary actions along with the personnel’s rank and unit--
