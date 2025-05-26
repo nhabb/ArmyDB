@@ -1,0 +1,19 @@
+# Ignore Oracle dump files
+*.dmp
+
+# Ignore log files
+*.log
+
+# Ignore compiled files or temp files
+*.class
+*.tmp
+*.bak
+*.swp
+
+# Ignore passwords or credentials if ever included
+*.env
+db_credentials.sql
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
