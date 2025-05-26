@@ -5,13 +5,13 @@ SELECT p.personnelID, p.firstName, p.lastName
 FROM personnel p
 JOIN personnel_missions pm ON p.personnelID = pm.personnelID
 JOIN missions m ON pm.missionID = m.missionID
-WHERE m.startDate >= TO_DATE('2022-01-01', 'YYYY-MM-DD')
+WHERE m.startDate >= TO_DATE('2020-01-01', 'YYYY-MM-DD')
   AND m.endDate <= SYSDATE
 GROUP BY p.personnelID, p.firstName, p.lastName
 HAVING COUNT(DISTINCT m.missionID) = (
     SELECT COUNT(DISTINCT missionID)
     FROM missions
-    WHERE startDate >= TO_DATE('2022-01-01', 'YYYY-MM-DD')
+    WHERE startDate >= TO_DATE('2025-01-01', 'YYYY-MM-DD')
       AND endDate <= SYSDATE
 );
 
@@ -33,7 +33,7 @@ AND EXISTS (
 );
 
 --------------------------------------------------------------------------------
--- 3. Longest-Serving Active Personnel Based on Enlistment Date
+-- 3. Longest-Serving Active Personnel Based on Enlistment Date (working)
 --------------------------------------------------------------------------------
 SELECT p.personnelID, p.firstName, p.lastName, p.enlistmentDate
 FROM personnel p
@@ -60,13 +60,13 @@ AND NOT EXISTS (
         SELECT 1
         FROM personnel_trainings pt
         WHERE pt.personnelID = p.personnelID
-          AND pt.trainingID = :trainingID
+          AND pt.trainingID = 3
           AND pt.completionDate IS NOT NULL
     )
 );
 
 --------------------------------------------------------------------------------
--- 5. Personnel Who Received Disciplinary Action After Receiving an Award
+-- 5. Personnel Who Received Disciplinary Action After Receiving an Award (working)
 --------------------------------------------------------------------------------
 SELECT p.personnelID, p.firstName, p.lastName
 FROM personnel p
