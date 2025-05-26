@@ -84,6 +84,6 @@ AND (
      WHERE da.personnelID = p.personnelID)
     >
     (SELECT MAX(a.dateAwarded)
-     FROM awards a
+     FROM awards a  
      WHERE a.personnelID = p.personnelID)
 );
