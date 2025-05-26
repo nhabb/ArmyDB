@@ -6,17 +6,17 @@ FROM personnel p
 JOIN personnel_missions pm ON p.personnelID = pm.personnelID
 JOIN missions m ON pm.missionID = m.missionID
 WHERE m.startDate >= TO_DATE('2022-01-01', 'YYYY-MM-DD')
-  AND m.endDate <= SYSDATE
+  AND m.STATUS = 'Completed'
 GROUP BY p.personnelID, p.firstName, p.lastName
 HAVING COUNT(DISTINCT m.missionID) = (
     SELECT COUNT(DISTINCT missionID)
     FROM missions
     WHERE startDate >= TO_DATE('2022-01-01', 'YYYY-MM-DD')
-      AND endDate <= SYSDATE
+      AND status = 'Completed'
 );
 
 --------------------------------------------------------------------------------
--- 2. Personnel Who Never Completed Any Training But Have Received Awards
+-- 2. Personnel Who Never Completed Any Training But Have Received Awards 
 --------------------------------------------------------------------------------
 SELECT p.personnelID, p.firstName, p.lastName
 FROM personnel p
@@ -33,9 +33,9 @@ AND EXISTS (
 );
 
 --------------------------------------------------------------------------------
--- 3. Longest-Serving Active Personnel Based on Enlistment Date
+-- 3. Longest-Serving Active Personnel Based on Enlistment Date 
 --------------------------------------------------------------------------------
-SELECT p.personnelID, p.firstName, p.lastName, p.enlistmentDate
+SELECT p.personnelID, p.firstName, p.lastName, TO_CHAR(p.enlistmentDate, 'DD-MM-YYYY') AS enlistmentDate
 FROM personnel p
 WHERE (SYSDATE - p.enlistmentDate) = (
     SELECT MAX(SYSDATE - enlistmentDate)
@@ -43,9 +43,9 @@ WHERE (SYSDATE - p.enlistmentDate) = (
     WHERE status = 'Active'
 );
 
+
 --------------------------------------------------------------------------------
--- 4. Units Where All Personnel Have Completed a Specific Training
--- NOTE: Replace :trainingID with a specific training ID, e.g., 3
+-- 4. Units Where All Personnel Have Completed a Specific Training (training id 1)
 --------------------------------------------------------------------------------
 SELECT u.unitID, u.unitName
 FROM units u
@@ -60,13 +60,13 @@ AND NOT EXISTS (
         SELECT 1
         FROM personnel_trainings pt
         WHERE pt.personnelID = p.personnelID
-          AND pt.trainingID = :trainingID
+          AND pt.trainingID = 1
           AND pt.completionDate IS NOT NULL
     )
 );
 
 --------------------------------------------------------------------------------
--- 5. Personnel Who Received Disciplinary Action After Receiving an Award
+-- 5. Personnel Who Received Disciplinary Action After Receiving an Award 
 --------------------------------------------------------------------------------
 SELECT p.personnelID, p.firstName, p.lastName
 FROM personnel p
@@ -84,6 +84,6 @@ AND (
      WHERE da.personnelID = p.personnelID)
     >
     (SELECT MAX(a.dateAwarded)
-     FROM awards a
+     FROM awards a  
      WHERE a.personnelID = p.personnelID)
 );
