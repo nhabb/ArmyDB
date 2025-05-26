@@ -5,18 +5,18 @@ SELECT p.personnelID, p.firstName, p.lastName
 FROM personnel p
 JOIN personnel_missions pm ON p.personnelID = pm.personnelID
 JOIN missions m ON pm.missionID = m.missionID
-WHERE m.startDate >= TO_DATE('2020-01-01', 'YYYY-MM-DD')
-  AND m.endDate <= SYSDATE
+WHERE m.startDate >= TO_DATE('2022-01-01', 'YYYY-MM-DD')
+  AND m.STATUS = 'Completed'
 GROUP BY p.personnelID, p.firstName, p.lastName
 HAVING COUNT(DISTINCT m.missionID) = (
     SELECT COUNT(DISTINCT missionID)
     FROM missions
-    WHERE startDate >= TO_DATE('2025-01-01', 'YYYY-MM-DD')
-      AND endDate <= SYSDATE
+    WHERE startDate >= TO_DATE('2022-01-01', 'YYYY-MM-DD')
+      AND status = 'Completed'
 );
 
 --------------------------------------------------------------------------------
--- 2. Personnel Who Never Completed Any Training But Have Received Awards
+-- 2. Personnel Who Never Completed Any Training But Have Received Awards (worked)
 --------------------------------------------------------------------------------
 SELECT p.personnelID, p.firstName, p.lastName
 FROM personnel p
