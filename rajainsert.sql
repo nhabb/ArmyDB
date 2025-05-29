@@ -8,7 +8,7 @@ INSERT INTO ranks (rankID, rankName, rankOrder) VALUES (1, 'Lieutenant', 1);
 INSERT INTO ranks (rankID, rankName, rankOrder) VALUES (2, 'Captain', 2);
 INSERT INTO ranks (rankID, rankName, rankOrder) VALUES (3, 'Major', 3);
 
-<<<<<<< HEAD
+
 -- PERSONNEL
 INSERT INTO personnel (personnelID, firstName, lastName, rankID, unitID, enlistmentDate)
 VALUES 
