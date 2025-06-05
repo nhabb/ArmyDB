@@ -17,9 +17,9 @@ JOIN
 SELECT * FROM View_Medical_Records;
 
 
------------------------------------------------------------------------------
---Show all offenses done by personnel and the action taken in this regard ---
------------------------------------------------------------------------------
+ ----------------------------------------------------------------------------
+-- Show all offenses done by personnel and the action taken in this regard  --
+ ----------------------------------------------------------------------------
 
 CREATE VIEW View_Offense AS
 SELECT 

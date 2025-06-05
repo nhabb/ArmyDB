@@ -1,5 +1,5 @@
 ---------------------------------------------------
---Selelct all personnel with their latest traning--
+ --Selelct all personnel with their latest traning --
 ---------------------------------------------------
 
 SELECT p.FIRSTNAME, p.LASTNAME, MAX(pm.COMPLETIONDATE) AS latest_date
@@ -17,7 +17,7 @@ JOIN personnel_missions pm  ON p.PERSONNELID = pm.PERSONNELID
 JOIN missions m ON pm.MISSIONID = m.MISSIONID;
 
 -----------------------------------------------------
---Shows all units with aquipment disaptched to them--
+--Shows all units with equipment disaptched to them--
 -----------------------------------------------------
 
 SELECT u.UNITNAME
@@ -43,11 +43,10 @@ FROM PERSONNEL p JOIN RANKS r ON p.RANKID = r.RANKID
 JOIN UNITS u ON u.UNITID = p.UNITID
 JOIN DISCIPLINARY_ACTIONS da ON p.PERSONNELID = da.PERSONNELID;
 
----------------------------------------------------
---Rank all bases by the number of units they host--
----------------------------------------------------
+-----------------------------------
+--SHOW EACH UNIT IN WHICH BASE  --
+-----------------------------------
 
-SELECT u.UNITNAME, b.baseName, Count(u.UNITID) AS numBases
+SELECT u.UNITNAME, b.baseName
 FROM UNITS u JOIN BASES b
-ON u.BASEID = b.BASEID
-GROUP BY u.UNITNAME, b.BASENAME;
+ON u.BASEID = b.BASEID;
