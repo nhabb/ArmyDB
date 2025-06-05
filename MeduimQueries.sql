@@ -48,5 +48,6 @@ JOIN DISCIPLINARY_ACTIONS da ON p.PERSONNELID = da.PERSONNELID;
 -----------------------------------
 
 SELECT u.UNITNAME, b.baseName
+
 FROM UNITS u JOIN BASES b
 ON u.BASEID = b.BASEID;

@@ -71,11 +71,11 @@ AND NOT EXISTS (
 SELECT p.personnelID, p.firstName, p.lastName
 FROM personnel p
 WHERE EXISTS (
-    SELECT 1 FROM disciplinary_actions da
+    SELECT * FROM disciplinary_actions da
     WHERE da.personnelID = p.personnelID
 )
 AND EXISTS (
-    SELECT 1 FROM awards a
+    SELECT * FROM awards a
     WHERE a.personnelID = p.personnelID
 )
 AND (
